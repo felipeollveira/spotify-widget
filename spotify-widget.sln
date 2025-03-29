@@ -1,8 +1,9 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.2.0
+VisualStudioVersion = 17.13.35828.75 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spotify-widget", "spotify-widget.csproj", "{1A4DC615-66A4-E41B-5BF8-F284718E120A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spotify-widget", "spotify-widget.csproj", "{A748D2AD-5EE1-47CE-B5C2-17804EB8512C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1A4DC615-66A4-E41B-5BF8-F284718E120A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A4DC615-66A4-E41B-5BF8-F284718E120A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A4DC615-66A4-E41B-5BF8-F284718E120A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A4DC615-66A4-E41B-5BF8-F284718E120A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A748D2AD-5EE1-47CE-B5C2-17804EB8512C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A748D2AD-5EE1-47CE-B5C2-17804EB8512C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A748D2AD-5EE1-47CE-B5C2-17804EB8512C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A748D2AD-5EE1-47CE-B5C2-17804EB8512C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AD2B36A9-9870-4471-AE72-B3E6B876AE94}
+		SolutionGuid = {37A52662-1D7A-4C91-99FC-6F5A1925EB8E}
 	EndGlobalSection
 EndGlobal

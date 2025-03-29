@@ -1,12 +1,94 @@
-﻿<Window x:Class="spotify_widget.MainWindow"
+﻿<Window x:Name="Widget_for_Spotify" x:Class="spotify_widget.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:spotify_widget"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Spotify Widget"
+        Height="120" Width="320"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="Transparent"
+        Topmost="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        ShowInTaskbar="False" Icon="/logo-icon.png">
+
     <Grid>
-        <Button Content="Clique aqui!" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click"/>
+        <!-- 🔹 Fundo escuro com transparência e sombra -->
+        <Border Background="#CC000000" CornerRadius="8" Padding="10" Effect="{DynamicResource DropShadowEffect}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 🔹 Capa do Álbum -->
+                <Image x:Name="AlbumImage"
+                       
+                       Width="80" Height="80"
+                       Margin="10"
+                       Grid.RowSpan="2"
+                       ClipToBounds="True"
+                       Stretch="UniformToFill"/>
+
+                <!-- 🔹 Nome da Música -->
+                <TextBlock x:Name="TrackName"
+                           Text="Example Heading"
+                           FontSize="16"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           Grid.Column="1"
+                           TextWrapping="Wrap" Margin="0,10,50,16" Grid.RowSpan="2"
+                           />
+
+                <!-- 🔹 Nome do Álbum -->
+                <TextBlock x:Name="AlbumName"
+                           Text="Example Heading"
+                           FontSize="12"
+                           Foreground="Gray"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           TextWrapping="Wrap"
+                           Margin="0,7,50,3"/>
+
+                <!-- 🔹 Nome dos Artistas -->
+                <TextBlock x:Name="ArtistName"
+                           Text="Example Heading"
+                           FontSize="10"
+                           Foreground="LightGray"
+                           Grid.Row="2"
+                           VerticalAlignment="Bottom"
+                           Grid.Column="1"
+                           TextWrapping="Wrap"
+                           Margin="0,17,45,10" Grid.RowSpan="2"/>
+
+                <!-- 🔹 Barra de Progresso -->
+                <ProgressBar x:Name="ProgressBar"
+                             Grid.Row="3"
+                             Minimum="0"
+                             Maximum="100" 
+                    Value="0"
+                             Foreground="LimeGreen"
+                             BorderThickness="0"
+                             Margin="10,20,12,0" Grid.ColumnSpan="2"/>
+
+                <!-- 🔹 Botão de Fechar -->
+                <Button Content="✕"
+                        Cursor="Hand"
+                        Width="20" Height="20"
+                        FontWeight="Bold"
+                        Background="Transparent"
+                        Foreground="WhiteSmoke"
+                        BorderThickness="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Grid.Column="1"
+                        Click="CloseButton_Click" RenderTransformOrigin="0,0.6" Margin="170,10,0,0" Grid.RowSpan="2"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

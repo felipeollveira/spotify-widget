@@ -1,30 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "V:\\Projects\\spotify-widget\\spotify-widget\\spotify-widget.csproj": {}
+    "V:\\Projects\\Widget para Spotify\\spotify-widget\\spotify-widget.csproj": {}
   },
   "projects": {
-    "V:\\Projects\\spotify-widget\\spotify-widget\\spotify-widget.csproj": {
+    "V:\\Projects\\Widget para Spotify\\spotify-widget\\spotify-widget.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "V:\\Projects\\spotify-widget\\spotify-widget\\spotify-widget.csproj",
+        "projectUniqueName": "V:\\Projects\\Widget para Spotify\\spotify-widget\\spotify-widget.csproj",
         "projectName": "spotify-widget",
-        "projectPath": "V:\\Projects\\spotify-widget\\spotify-widget\\spotify-widget.csproj",
+        "projectPath": "V:\\Projects\\Widget para Spotify\\spotify-widget\\spotify-widget.csproj",
         "packagesPath": "C:\\Users\\Felip\\.nuget\\packages\\",
-        "outputPath": "V:\\Projects\\spotify-widget\\spotify-widget\\obj\\",
+        "outputPath": "V:\\Projects\\Widget para Spotify\\spotify-widget\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Felip\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Felip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net9.0-windows"
+          "net8.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0-windows7.0": {
-            "targetAlias": "net9.0-windows",
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
             "projectReferences": {}
           }
         },
@@ -41,8 +47,8 @@
         "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net9.0-windows7.0": {
-          "targetAlias": "net9.0-windows",
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
           "imports": [
             "net461",
             "net462",
@@ -62,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "V:\\Tools\\.NET\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

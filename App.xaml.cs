@@ -9,6 +9,5 @@ namespace spotify_widget;
 /// </summary>
 public partial class App : Application
 {
-    
 }
 
