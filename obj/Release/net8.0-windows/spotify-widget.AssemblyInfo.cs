@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("spotify-widget")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e050825dfc98b010f09425d1447deb800440fbc1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+737bd7d43c9b6effb5cb8c9e3a8ea6bc676e9e8c")]
 [assembly: System.Reflection.AssemblyProductAttribute("spotify-widget")]
 [assembly: System.Reflection.AssemblyTitleAttribute("spotify-widget")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

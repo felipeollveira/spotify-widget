@@ -1,93 +1,176 @@
-﻿<Window x:Name="Widget_for_Spotify" x:Class="spotify_widget.MainWindow"
+﻿<Window x:Class="spotify_widget.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Spotify Widget"
-        Height="120" Width="320"
+        Height="160" Width="360"
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
         Topmost="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        ShowInTaskbar="False" Icon="/logo-icon.png">
+        ShowInTaskbar="False">
+
+    <Window.Resources>
+        <!-- Fallback image quando não houver capa -->
+        <BitmapImage x:Key="FallbackImage" UriSource="https://via.placeholder.com/150"/>
+
+        <!-- Gradiente para overlay da capa do álbum -->
+        <LinearGradientBrush x:Key="AlbumOverlayGradient" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#00000000" Offset="0.5"/>
+            <GradientStop Color="#AA000000" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Style para os textos -->
+        <Style TargetType="TextBlock" x:Key="TrackTextStyle">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+        </Style>
+
+        <!-- Style para o botão de fechar -->
+        <Style TargetType="Button" x:Key="CloseButtonStyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#AAAAAA"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
     <Grid>
-        <!-- 🔹 Fundo escuro com transparência e sombra -->
-        <Border Background="#CC000000" CornerRadius="8" Padding="10" Effect="{DynamicResource DropShadowEffect}">
+        <!-- Sombra externa -->
+        <Border Margin="10" CornerRadius="12" Background="Transparent">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" 
+                                  ShadowDepth="0" 
+                                  Color="#000000" 
+                                  Opacity="0.5"/>
+            </Border.Effect>
+        </Border>
+
+        <!-- Widget principal -->
+        <Border Background="#B2181818" CornerRadius="12" Padding="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                <!-- 🔹 Capa do Álbum com overlay e efeito de brilho -->
+                <Border Grid.Column="0" Width="160" Height="160"
+                        CornerRadius="12,0,0,12" ClipToBounds="True">
+                    <Grid>
+                        <Image x:Name="AlbumImage" Stretch="UniformToFill"
+                               Source="{Binding CurrentTrack.Details.Images[0].Url, 
+                                      FallbackValue={StaticResource FallbackImage},
+                                      TargetNullValue={StaticResource FallbackImage}}">
+                            <Image.Effect>
+                                <BlurEffect Radius="10" KernelType="Gaussian"/>
+                            </Image.Effect>
+                        </Image>
 
-                <!-- 🔹 Capa do Álbum -->
-                <Image x:Name="AlbumImage"
-                       
-                       Width="80" Height="80"
-                       Margin="10"
-                       Grid.RowSpan="2"
-                       ClipToBounds="True"
-                       Stretch="UniformToFill"/>
+                        <!-- Overlay escuro -->
+                        <Rectangle Fill="{StaticResource AlbumOverlayGradient}"/>
 
-                <!-- 🔹 Nome da Música -->
-                <TextBlock x:Name="TrackName"
-                           Text="Example Heading"
-                           FontSize="16"
-                           Foreground="White"
-                           FontWeight="Bold"
-                           Grid.Column="1"
-                           TextWrapping="Wrap" Margin="0,10,50,16" Grid.RowSpan="2"
-                           />
+                        <!-- Imagem principal -->
+                        <Image Source="{Binding ElementName=AlbumImage, Path=Source}"
+                               Width="100" Height="100" 
+                               Margin="30" VerticalAlignment="Center"
+                               Stretch="UniformToFill">
+                            <Image.Effect>
+                                <DropShadowEffect BlurRadius="15" 
+                                              ShadowDepth="0" 
+                                              Color="#000000" 
+                                              Opacity="0.8"/>
+                            </Image.Effect>
+                        </Image>
+                    </Grid>
+                </Border>
 
-                <!-- 🔹 Nome do Álbum -->
-                <TextBlock x:Name="AlbumName"
-                           Text="Example Heading"
-                           FontSize="12"
-                           Foreground="Gray"
-                           Grid.Row="1"
-                           Grid.Column="1"
-                           TextWrapping="Wrap"
-                           Margin="0,7,50,3"/>
+                <!-- 🔹 Área de informações -->
+                <Grid Grid.Column="1" Margin="15,15,15,15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <!-- 🔹 Nome dos Artistas -->
-                <TextBlock x:Name="ArtistName"
-                           Text="Example Heading"
-                           FontSize="10"
-                           Foreground="LightGray"
-                           Grid.Row="2"
-                           VerticalAlignment="Bottom"
-                           Grid.Column="1"
-                           TextWrapping="Wrap"
-                           Margin="0,17,45,10" Grid.RowSpan="2"/>
+                    <!-- 🔹 Cabeçalho com botão de fechar -->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                <!-- 🔹 Barra de Progresso -->
-                <ProgressBar x:Name="ProgressBar"
-                             Grid.Row="3"
-                             Minimum="0"
-                             Maximum="100" 
-                    Value="0"
-                             Foreground="LimeGreen"
-                             BorderThickness="0"
-                             Margin="10,20,12,0" Grid.ColumnSpan="2"/>
+                        <!-- Status de reprodução -->
+                        <TextBlock Grid.Column="0"
+                                   FontSize="10" FontWeight="Medium"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#AAAAAA"/>
+                                    <Setter Property="Text" Value="⏸ PAUSADO"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding CurrentTrack.IsPlaying}" Value="True">
+                                            <Setter Property="Foreground" Value="#1DB954"/>
+                                            <Setter Property="Text" Value="▶ TOCANDO AGORA"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
-                <!-- 🔹 Botão de Fechar -->
-                <Button Content="✕"
-                        Cursor="Hand"
-                        Width="20" Height="20"
-                        FontWeight="Bold"
-                        Background="Transparent"
-                        Foreground="WhiteSmoke"
-                        BorderThickness="0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Grid.Column="1"
-                        Click="CloseButton_Click" RenderTransformOrigin="0,0.6" Margin="170,10,0,0" Grid.RowSpan="2"/>
+                        <!-- Botão Fechar -->
+                        <Button Grid.Column="1" Style="{StaticResource CloseButtonStyle}"
+                                Click="CloseButton_Click" Padding="5">
+                            <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                  Stretch="Uniform" Width="12" Height="12"/>
+                        </Button>
+                    </Grid>
+
+                    <!-- 🔹 Informações da faixa -->
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0,10,0,10">
+                        <!-- Nome da Música -->
+                        <TextBlock Text="{Binding CurrentTrack.Details.Name, FallbackValue='Nenhuma música tocando'}"
+                                   Style="{StaticResource TrackTextStyle}"
+                                   FontSize="18" FontWeight="Bold"
+                                   Margin="0,0,0,5"/>
+
+                        <!-- Nome do Artista -->
+                        <TextBlock Text="{Binding CurrentTrack.Details.Artists[0], FallbackValue='Artista desconhecido'}"
+                                   Style="{StaticResource TrackTextStyle}"
+                                   FontSize="14" Foreground="#AAAAAA"
+                                   Margin="0,0,0,3"/>
+
+                        <!-- Nome do Álbum -->
+                        <TextBlock Text="{Binding CurrentTrack.Details.Album, FallbackValue='Álbum desconhecido'}"
+                                   Style="{StaticResource TrackTextStyle}"
+                                   FontSize="12" Foreground="#777777"
+                                   FontStyle="Italic"/>
+                    </StackPanel>
+
+                    <!-- 🔹 Barra de Progresso -->
+                    <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                        <ProgressBar Minimum="0" Maximum="{Binding CurrentTrack.DurationMs, FallbackValue=100}"
+                                     Value="{Binding CurrentTrack.ProgressMs, FallbackValue=0}"
+                                     Foreground="#1DB954" Background="#333333"
+                                     Height="4" BorderThickness="0"/>
+                    </Grid>
+                </Grid>
             </Grid>
         </Border>
     </Grid>
